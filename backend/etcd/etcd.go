@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/jinlongchen/crypt/backend"
+	// go get -v go.etcd.io/etcd/v3/clientv3@master
 	"go.etcd.io/etcd/v3/clientv3"
 	"go.etcd.io/etcd/v3/mvcc/mvccpb"
 )

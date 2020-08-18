@@ -8,7 +8,6 @@ import (
 	"github.com/jinlongchen/crypt/backend"
 	"github.com/jinlongchen/crypt/backend/consul"
 	"github.com/jinlongchen/crypt/backend/etcd"
-	"github.com/jinlongchen/crypt/backend/firestore"
 	"github.com/jinlongchen/crypt/encoding/secconf"
 )
 
@@ -47,15 +46,6 @@ func NewConfigManager(client backend.Store, keystore io.Reader) (ConfigManager, 
 	return configManager{bytes, client}, nil
 }
 
-// NewStandardFirestoreConfigManager returns a new ConfigManager backed by Firestore.
-func NewStandardFirestoreConfigManager(machines []string) (ConfigManager, error) {
-	store, err := firestore.New(machines)
-	if err != nil {
-		return nil, err
-	}
-	return NewStandardConfigManager(store)
-}
-
 // NewStandardEtcdConfigManager returns a new ConfigManager backed by etcd.
 func NewStandardEtcdConfigManager(machines []string) (ConfigManager, error) {
 	store, err := etcd.New(machines)
@@ -73,16 +63,6 @@ func NewStandardConsulConfigManager(machines []string) (ConfigManager, error) {
 		return nil, err
 	}
 	return NewStandardConfigManager(store)
-}
-
-// NewFirestoreConfigManager returns a new ConfigManager backed by Firestore.
-// Data will be encrypted.
-func NewFirestoreConfigManager(machines []string, keystore io.Reader) (ConfigManager, error) {
-	store, err := firestore.New(machines)
-	if err != nil {
-		return nil, err
-	}
-	return NewConfigManager(store, keystore)
 }
 
 // NewEtcdConfigManager returns a new ConfigManager backed by etcd.
