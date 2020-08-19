@@ -6,8 +6,6 @@ import (
 	"io/ioutil"
 
 	"github.com/jinlongchen/crypt/backend"
-	"github.com/jinlongchen/crypt/backend/consul"
-	"github.com/jinlongchen/crypt/backend/etcd"
 	"github.com/jinlongchen/crypt/encoding/secconf"
 )
 
@@ -48,41 +46,45 @@ func NewConfigManager(client backend.Store, keystore io.Reader) (ConfigManager, 
 
 // NewStandardEtcdConfigManager returns a new ConfigManager backed by etcd.
 func NewStandardEtcdConfigManager(machines []string) (ConfigManager, error) {
-	store, err := etcd.New(machines)
-	if err != nil {
-		return nil, err
-	}
-
-	return NewStandardConfigManager(store)
+	return NewStandardConfigManager(nil)
+	//store, err := etcd.New(machines)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//return NewStandardConfigManager(store)
 }
 
 // NewStandardConsulConfigManager returns a new ConfigManager backed by consul.
 func NewStandardConsulConfigManager(machines []string) (ConfigManager, error) {
-	store, err := consul.New(machines)
-	if err != nil {
-		return nil, err
-	}
-	return NewStandardConfigManager(store)
+	return NewStandardConfigManager(nil)
+	//store, err := consul.New(machines)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//return NewStandardConfigManager(store)
 }
 
 // NewEtcdConfigManager returns a new ConfigManager backed by etcd.
 // Data will be encrypted.
 func NewEtcdConfigManager(machines []string, keystore io.Reader) (ConfigManager, error) {
-	store, err := etcd.New(machines)
-	if err != nil {
-		return nil, err
-	}
-	return NewConfigManager(store, keystore)
+	return NewConfigManager(nil, keystore)
+	//store, err := etcd.New(machines)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//return NewConfigManager(store, keystore)
 }
 
 // NewConsulConfigManager returns a new ConfigManager backed by consul.
 // Data will be encrypted.
 func NewConsulConfigManager(machines []string, keystore io.Reader) (ConfigManager, error) {
-	store, err := consul.New(machines)
-	if err != nil {
-		return nil, err
-	}
-	return NewConfigManager(store, keystore)
+	return NewConfigManager(nil, keystore)
+	//store, err := consul.New(machines)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//return NewConfigManager(store, keystore)
 }
 
 // Get retrieves and decodes a secconf value stored at key.
