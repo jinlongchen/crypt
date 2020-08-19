@@ -8,6 +8,8 @@ import (
 	//"github.com/jinlongchen/etcd/clientv3"
 	//"github.com/jinlongchen/etcd/mvcc/mvccpb"
 	_ "github.com/jinlongchen/etcd/client"
+        _ "github.com/jinlongchen/etcd/bbolt"
+
 )
 
 //
