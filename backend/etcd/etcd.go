@@ -7,7 +7,7 @@ import (
 	//"github.com/jinlongchen/crypt/backend"
 	//"github.com/jinlongchen/etcd/clientv3"
 	//"github.com/jinlongchen/etcd/mvcc/mvccpb"
-	_ "github.com/jinlongchen/myetcd/client"
+	_ "github.com/jinlongchen/etcd/client"
 )
 
 //
